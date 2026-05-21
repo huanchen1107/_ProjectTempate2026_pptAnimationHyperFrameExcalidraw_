@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, Easing, staticFile, useVideoConfig } from "remotion";
-import { Audio } from "@remotion/media";
+import { Video } from "@remotion/media";
 import { BlueprintBackground } from "./components/BlueprintBackground";
 import { SOPNode, NodeConnector } from "./components/SOPNode";
 import { CRISP_DECEL } from "./utils/PaperSOPEasing";
@@ -64,15 +64,25 @@ export const PaperSOP: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
-      {/* Background Audio from YouTube */}
-      <Audio 
-        src={staticFile("audio.webm")} 
+      {/* Background Video from YouTube */}
+      <Video 
+        src={staticFile("video.mp4")} 
         trimBefore={112 * fps} 
         trimAfter={149 * fps} 
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
       />
 
-      {/* 1. Holographic Grid Blueprint Canvas */}
-      <BlueprintBackground />
+      {/* 1. Holographic Grid Blueprint Canvas (Semi-transparent overlay) */}
+      <div style={{ opacity: 0.15, pointerEvents: "none" }}>
+        <BlueprintBackground />
+      </div>
 
       {/* 2. Top Header Sci-fi Branding Overlay */}
       <div
