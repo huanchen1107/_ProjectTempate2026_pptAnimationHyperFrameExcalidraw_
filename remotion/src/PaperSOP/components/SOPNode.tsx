@@ -1,7 +1,6 @@
 import React from "react";
-import { useCurrentFrame, interpolate, Easing, Img } from "remotion";
+import { useCurrentFrame, interpolate } from "remotion";
 import { getPopSpring } from "../utils/PaperSOPEasing";
-import handPanImg from "../../assets/hand-pan.jpg";
 
 interface SOPNodeProps {
   letter: string;
@@ -70,73 +69,6 @@ export const SOPNode: React.FC<SOPNodeProps> = ({
         zIndex: status === "aligned" ? 10 : 2,
       }}
     >
-      {/* Animated Pen Drawing effect */}
-      {frame >= startFrame && (
-        <div style={{ position: "absolute", top: 45, left: 45 }}>
-          {(() => {
-            const drawProgress = interpolate(frame - startFrame, [0, 25], [0, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-              easing: Easing.out(Easing.quad),
-            });
-
-            const radius = 60;
-            const circumference = 2 * Math.PI * radius;
-            const strokeDashoffset = circumference * (1 - drawProgress);
-            
-            // Start from top (-90 deg), go clockwise
-            const angle = drawProgress * 2 * Math.PI - Math.PI / 2;
-            const penX = radius * Math.cos(angle);
-            const penY = radius * Math.sin(angle);
-
-            return (
-              <svg 
-                style={{ 
-                  position: "absolute", 
-                  top: -75, 
-                  left: -75, 
-                  width: 150, 
-                  height: 150, 
-                  pointerEvents: "none", 
-                  zIndex: 15 
-                }}
-              >
-                {/* The drawn circle */}
-                <circle 
-                  cx={75} 
-                  cy={75} 
-                  r={radius} 
-                  fill="none" 
-                  stroke={status === "aligned" ? "#ff3131" : "#ffaa00"} 
-                  strokeWidth={4} 
-                  strokeDasharray={circumference}
-                  strokeDashoffset={strokeDashoffset}
-                  strokeLinecap="round"
-                  style={{ transform: "rotate(-90deg)", transformOrigin: "50% 50%" }}
-                />
-                
-                {/* The Hand with Pencil tracing the path */}
-                {drawProgress > 0 && drawProgress < 1 && (
-                  <g style={{ transform: `translate(${75 + penX}px, ${75 + penY}px)` }}>
-                    <foreignObject x="-60" y="-60" width="120" height="120" style={{ pointerEvents: "none" }}>
-                      <Img 
-                        src={handPanImg} 
-                        style={{ 
-                          width: "100%", 
-                          height: "100%", 
-                          objectFit: "contain",
-                          mixBlendMode: "multiply",
-                          filter: "brightness(0.9) contrast(1.2)"
-                        }} 
-                      />
-                    </foreignObject>
-                  </g>
-                )}
-              </svg>
-            );
-          })()}
-        </div>
-      )}
 
       {/* Dynamic Glow Outer Ring */}
       <div
