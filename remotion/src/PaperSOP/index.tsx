@@ -1,11 +1,13 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, Easing } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, Easing, staticFile, useVideoConfig } from "remotion";
+import { Audio } from "@remotion/media";
 import { BlueprintBackground } from "./components/BlueprintBackground";
 import { SOPNode, NodeConnector } from "./components/SOPNode";
 import { CRISP_DECEL } from "./utils/PaperSOPEasing";
 
 export const PaperSOP: React.FC = () => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
   // --- Dynamic Node Coordinates ---
   // Centered at Y = 540, distributed horizontally at 300px intervals
@@ -62,6 +64,13 @@ export const PaperSOP: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
+      {/* Background Audio from YouTube */}
+      <Audio 
+        src={staticFile("audio.webm")} 
+        trimBefore={112 * fps} 
+        trimAfter={149 * fps} 
+      />
+
       {/* 1. Holographic Grid Blueprint Canvas */}
       <BlueprintBackground />
 
