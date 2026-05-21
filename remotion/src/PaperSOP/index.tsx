@@ -62,6 +62,9 @@ export const PaperSOP: React.FC = () => {
     easing: Easing.back(1.5),
   });
 
+  // --- Background Cinematic Zoom ---
+  const bgScale = interpolate(frame, [0, 1110], [1, 1.05]);
+
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
       {/* Background Audio from YouTube */}
@@ -81,6 +84,8 @@ export const PaperSOP: React.FC = () => {
           position: "absolute",
           top: 0,
           left: 0,
+          transform: `scale(${bgScale})`,
+          transformOrigin: "center center",
         }}
       />
 
