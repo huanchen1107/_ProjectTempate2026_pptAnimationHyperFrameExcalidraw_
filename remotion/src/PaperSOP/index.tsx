@@ -1,6 +1,6 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, Easing, staticFile, useVideoConfig } from "remotion";
-import { Video } from "@remotion/media";
+import { AbsoluteFill, useCurrentFrame, interpolate, Easing, staticFile, useVideoConfig, Img } from "remotion";
+import { Audio } from "@remotion/media";
 import { BlueprintBackground } from "./components/BlueprintBackground";
 import { SOPNode, NodeConnector } from "./components/SOPNode";
 import { CRISP_DECEL } from "./utils/PaperSOPEasing";
@@ -64,11 +64,16 @@ export const PaperSOP: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
-      {/* Background Video from YouTube */}
-      <Video 
-        src={staticFile("video.mp4")} 
+      {/* Background Audio from YouTube */}
+      <Audio 
+        src={staticFile("audio.webm")} 
         trimBefore={112 * fps} 
         trimAfter={149 * fps} 
+      />
+
+      {/* Static Background Image (Extracted Frame) */}
+      <Img 
+        src={staticFile("static_background.png")} 
         style={{
           width: "100%",
           height: "100%",
