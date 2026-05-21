@@ -4,12 +4,21 @@ import { HelloWorld, myCompSchema } from "./HelloWorld";
 import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import { SimpleLogo } from "./SimpleLogo";
 import { LoveClip } from "./LoveClip";
+import { PaperSOP } from "./PaperSOP";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="PaperSOP"
+        component={PaperSOP}
+        durationInFrames={1110}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
       <Composition
         id="LoveClip"
         component={LoveClip}
@@ -18,7 +27,6 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
       />
-
       <Composition
         // You can take the "id" to render a video:
         // npx remotion render HelloWorld
@@ -38,7 +46,6 @@ export const RemotionRoot: React.FC = () => {
           logoColor2: "#86A8E7",
         }}
       />
-
       {/* Mount any React component to make it show up in the sidebar and work on it individually! */}
       <Composition
         id="OnlyLogo"
@@ -53,7 +60,6 @@ export const RemotionRoot: React.FC = () => {
           logoColor2: "#86A8E7" as const,
         }}
       />
-
       <Composition
         id="SimpleLogo"
         component={SimpleLogo}
